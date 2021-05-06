@@ -2,7 +2,7 @@ version: '3'
 
 services:
     postgres:
-        image: postgres:11
+        image: postgres:13-alpine
         environment:
             POSTGRES_DB: commento
             POSTGRES_USER: postgres
@@ -21,18 +21,18 @@ services:
             COMMENTO_POSTGRES: postgres://postgres:postgres@postgres:5432/commento?sslmode=disable
 
             # Update the settings below appropriately
-            COMMENTO_ORIGIN: https://{COMMENTO_ORIGIN}
+            COMMENTO_ORIGIN: https://${COMMENTO_ORIGIN}
 
             # Uncomment to disable new Dashboard users
             #COMMENTO_FORBID_NEW_OWNERS: 'true'
 
             # SMTP settings
-            COMMENTO_SMTP_HOST: "{COMMENTO_SMTP_HOST}"
+            COMMENTO_SMTP_HOST: ${COMMENTO_SMTP_HOST}
             COMMENTO_SMTP_PORT: 587
-            COMMENTO_SMTP_USERNAME: "{COMMENTO_SMTP_USERNAME}"
-            COMMENTO_SMTP_PASSWORD: "{COMMENTO_SMTP_PASSWORD}"
-            COMMENTO_SMTP_FROM_ADDRESS: "{COMMENTO_SMTP_FROM_ADDRESS}"
-            COMMENTO_AKISMET_KEY: "{COMMENTO_AKISMET_KEY}"
+            COMMENTO_SMTP_USERNAME: ${COMMENTO_SMTP_USERNAME}
+            COMMENTO_SMTP_PASSWORD: ${COMMENTO_SMTP_PASSWORD}
+            COMMENTO_SMTP_FROM_ADDRESS: ${COMMENTO_SMTP_FROM_ADDRESS}
+            COMMENTO_AKISMET_KEY: ${COMMENTO_AKISMET_KEY}
 
             # Google OAuth2
             # COMMENTO_GOOGLE_KEY: YOUR_API_KEY
@@ -55,8 +55,8 @@ services:
             context: certbot
         environment:
             # Update the settings below appropriately
-            DOMAIN: {COMMENTO_ORIGIN}
-            EMAIL: {COMMENTO_EMAIL_ADDRESS}
+            DOMAIN: ${COMMENTO_ORIGIN}
+            EMAIL: ${COMMENTO_EMAIL_ADDRESS}
         volumes:
             - certbot_etc_volume:/etc/letsencrypt
             - certbot_var_volume:/var/www/certbot
@@ -68,7 +68,7 @@ services:
             context: nginx
             args:
                 # Update the settings below appropriately
-                DOMAIN: {COMMENTO_ORIGIN}
+                DOMAIN: ${COMMENTO_ORIGIN}
         ports:
             - 80:80
             - 443:443
