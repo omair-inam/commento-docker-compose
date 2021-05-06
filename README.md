@@ -14,7 +14,7 @@ Using this as a starting point, you can set up a self-hosted Commento instance i
 1. Install [Docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/)
 2. Clone the project code to `/opt/commento`, for example:
     ```bash
-    sudo git clone https://github.com/yktoo/commento-docker-compose.git /opt/commento
+    sudo git clone https://github.com/omair-inam/commento-docker-compose.git /opt/commento
     ```
 3. Edit `/opt/commento/docker-compose.yml` and update the environment variable values appropriately
 4. Recommended: pre-build and pre-pull the required images:
